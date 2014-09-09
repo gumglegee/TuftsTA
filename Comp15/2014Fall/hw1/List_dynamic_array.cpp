@@ -177,6 +177,8 @@ Card List_dynamic_array::remove_from_head()
         // cards back one spot
         // Returns the card that was removed
 
+	return remove_from_index(0);
+
 }
 
 Card List_dynamic_array::remove_from_tail()
@@ -186,6 +188,7 @@ Card List_dynamic_array::remove_from_tail()
 
         // TODO: Student writes code here
 	// removes the card that is at the tail, and returns it
+
 }
 
 Card List_dynamic_array::remove_from_index(int index)

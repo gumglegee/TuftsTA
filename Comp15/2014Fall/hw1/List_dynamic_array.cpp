@@ -157,6 +157,11 @@ bool List_dynamic_array::has_card(Card c) {
         // loop through the cards and use the same_card()
         // method in Card.cpp to compare the cards
         // Returns true if the card is in the hand, false otherwise
+	for (int i = 0; i < cards_held; i++) {
+		if (cards[i].same_card(c))
+			return true;
+	}
+	return false;
 }
 
 bool List_dynamic_array::remove(Card c)
@@ -165,6 +170,14 @@ bool List_dynamic_array::remove(Card c)
 	// find the card and remove from the hand
 	// Returns true if the card was found and removed,
 	// false otherwise
+	for (int i = 0; i < cards_held; i++) {
+		if (cards[i].same_card(c)) {
+			remove_from_index(i);
+			return true;
+		}
+	}
+
+	return false;
 }
 
 Card List_dynamic_array::remove_from_head()
@@ -189,6 +202,10 @@ Card List_dynamic_array::remove_from_tail()
         // TODO: Student writes code here
 	// removes the card that is at the tail, and returns it
 
+	Card removed = cards[cards_held - 1];
+	cards_held -= 1;
+
+	return removed;
 }
 
 Card List_dynamic_array::remove_from_index(int index)
@@ -205,6 +222,14 @@ Card List_dynamic_array::remove_from_index(int index)
 
 	// Returns the card that was removed
 	
+	Card removed = cards[index];
+	for (int i = index; i < cards_held; i++) {
+		cards[i] = cards[i+1];
+	}
+
+	cards_held -= 1;
+
+	return removed;
 }
 
 void List_dynamic_array::expand()

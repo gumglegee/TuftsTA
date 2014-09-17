@@ -194,6 +194,35 @@ void List_linked_list::insert_at_tail(Card c) {
 // after the current tail.
 void List_linked_list::insert_at_index(Card c, int index) {
 	// TODO:
+
+	//if insert at index 0, just insert the card at the head
+	if (index == 0)
+		insert_at_head(c);
+	else {	//insert at index other than the head
+		if (head != NULL) { //works only if the list is not empty
+			Card_Node *newNode = new Card_Node();
+			newNode->card = c;
+			newNode->next = NULL;
+
+			Card_Node *current = head;
+			int currentIndex = 0;
+
+			//loop through the linked list, and go to the node at index-1
+			while ((current->next != NULL)
+					&& (currentIndex < (index - 1))) {
+				current = current->next;
+				currentIndex++;
+			}
+
+			if (currentIndex == (index - 1)) {	// at index-1
+				//link the newNode with the original index node
+				newNode->next = current->next;
+
+				//link the newNode with the index-1 node
+				current->next = newNode;
+			}
+		}	//end if
+	}	//end else
 }
 
 // replaces the card at index

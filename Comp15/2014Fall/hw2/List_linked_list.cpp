@@ -289,7 +289,46 @@ bool List_linked_list::has_card(Card c) {
 // Returns true if the card was removed
 // Returns false if the card was not in the list
 bool List_linked_list::remove(Card c) {
-	// TODO:
+
+	//returns false if the list is empty
+	if (head == NULL)
+		return false;
+
+
+	Card_Node *current = head;
+
+	//corner case: c is in the head
+	if (head->card.same_card(c)) {
+		//update head
+		head = head->next;
+
+		//delete the original head
+		delete current;
+
+		return true;
+	}
+	else {	//c is not in the head
+		Card_Node *prev = NULL;
+		//loop through the linked list, until find one node matches c
+		while (current != NULL) {
+			if (current->card.same_card(c)) { //matches c
+				//update link
+				prev->next = current->next;
+
+				//delete the node
+				delete current;
+
+				return true;
+			}
+
+			//update the iterators
+			prev = current;
+			current = current->next;
+		}
+
+		//returns false is the card is not in the linked list
+		return false;
+	}	//end else
 
 }
 

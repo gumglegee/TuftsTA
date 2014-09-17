@@ -246,9 +246,9 @@ void List_linked_list::replace_at_index(Card c, int index) {
 // returns the card at index.
 // allowed to crash if index is not in the list
 Card List_linked_list::card_at(int index) {
-	//if the list is empty, return NULL
+	//if the list is empty, return an empty card
 	if (head == NULL)
-		return NULL;
+		return Card();
 
 	int currentIndex = 0;
 	Card_Node *current = head;
@@ -260,7 +260,7 @@ Card List_linked_list::card_at(int index) {
 	}
 
 	if (current == NULL)	//the card is not in the list
-		return NULL;
+		return Card();
 	else {			//returns the card at index
 		return current->card;
 	}
@@ -337,9 +337,9 @@ bool List_linked_list::remove(Card c) {
 // Returns the card that was removed
 // Allowed to fail if list is empty
 Card List_linked_list::remove_from_head() {
-	//if the list is empty, return NULL
+	//if the list is empty, return an empty card
 	if (head == NULL)
-		return NULL;
+		return Card();
 
 	Card_Node *current = head;
 	Card c = current->card;
@@ -358,9 +358,9 @@ Card List_linked_list::remove_from_head() {
 // Returns the card that was removed
 // Allowed to fail if the list is empty
 Card List_linked_list::remove_from_tail() {
-	//if the list is empty, return NULL
+	//if the list is empty, return an empty card
 	if (head == NULL)
-		return NULL;
+		return Card();
 
 	Card_Node *current = head;
 	Card_Node *prev = NULL;
@@ -400,6 +400,42 @@ Card List_linked_list::remove_from_tail() {
 // Returns the card that was removed
 // Allowed to fail if index is beyond the end of the list
 Card List_linked_list::remove_from_index(int index) {
-	// TODO:
+
+	//returns an empty card is the linked list is empty
+	if (head == NULL)
+		return Card();
+
+	//corner case: index 0, remove from head
+	if (index == 0) {
+		return remove_from_head();
+	}
+	else {	//index is not the head
+		Card_Node *current = head->next;
+		Card_Node *prev = head;
+		int currentIndex = 1;
+
+		//loop through the linked list until find index or the list is end
+		while ((current != NULL) && (currentIndex < index)) {
+			//update iterators
+			prev = current;
+			current = current->next;
+			currentIndex++;
+		}
+
+		if (currentIndex == index) { //find index
+			Card c = current->card;
+
+			//update links
+			prev->next = current->next;
+
+			//delete the current node
+			delete current;
+
+			return c;
+		}
+		else {	//index is beyond the end of the list
+			return Card();
+		}
+	}//end else
 
 }

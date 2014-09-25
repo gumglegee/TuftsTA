@@ -52,13 +52,45 @@ bool Maze::solve_maze_recursive(int row, int col) {
 	// Recursively call solve_maze_recursive(row,col) for north, east, south, and west
 	// If one of the positions returns true, then return true (north is done for you)
 
+	//returns false, if co-ordinates are out of bounds
+	if (row < 0 || row >= maze_array_size || col < 0 || col
+			>= maze_array_size)
+		return false;
+
+	//returns false, if the element is a blocked or known path
+	if (maze[row][col] == 'X'
+		|| maze[row][col] == 'b'
+		|| maze[row][col] == '.')
+		return false;
+
+	//returns true, if reaches the exit
+	if (maze[row][col] == 'F')
+		return true;
+
+	maze[row][col] = '.';
+
 	// north
-	if (solve_maze_recursive(row-1,col) == true) {
+	if (solve_maze_recursive(row - 1, col) == true) {
+		return true;
+	}
+	// east
+	if (solve_maze_recursive(row, col+1) == true) {
+		return true;
+	}
+	// south
+	if (solve_maze_recursive(row + 1, col) == true) {
+		return true;
+	}
+	// west
+	if (solve_maze_recursive(row, col-1) == true) {
 		return true;
 	}
 
 	// TODO: Students write code here
+	// if none of the directions were successful, mark it as 'b'
+	maze[row][col] = 'b';
 
+	return false;
 }
 
 void Maze::solve_maze_stack(int row, int col){
@@ -75,7 +107,7 @@ void Maze::solve_maze_stack(int row, int col){
 				maze[row-1][col]!='X' &&
 				maze[row-1][col]!='b' &&
 				maze[row-1][col]!='.'){
-			stack.push(Position(row,col));
+		//	stack.push(Position(row,col));
 			row-=1;
 			continue;
 		}

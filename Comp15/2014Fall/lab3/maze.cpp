@@ -98,21 +98,65 @@ void Maze::solve_maze_stack(int row, int col){
 
 	// TODO: Students write code here
 
+	//create a stack
+	Stack stack;
+
 	while (1){
 
 		// TODO: Students write code here
+		//break out of the loop if reaches 'F'
+		if (maze[row][col] == 'F')
+			break;
+
+		//make the current position with a period '.'
+		maze[row][col] = '.';
 
 		// north
-		if (row-1 >= 0 &&
+		if (row -1 >= 0 &&
 				maze[row-1][col]!='X' &&
 				maze[row-1][col]!='b' &&
 				maze[row-1][col]!='.'){
-		//	stack.push(Position(row,col));
+			stack.push(Position(row,col));
 			row-=1;
 			continue;
 		}
 
 		// TODO: Students write code here
+
+		// east
+		if (col + 1 <= maze_array_size && maze[row][col+1] != 'X'
+				&& maze[row][col+1] != 'b'
+				&& maze[row][col+1] != '.') {
+				stack.push(Position(row,col));
+			col += 1;
+			continue;
+		}
+		// south
+		if (row + 1 <= maze_array_size && maze[row + 1][col] != 'X'
+				&& maze[row + 1][col] != 'b'
+				&& maze[row + 1][col] != '.') {
+				stack.push(Position(row,col));
+			row += 1;
+			continue;
+		}
+		// west
+		if (col - 1 >= 0 && maze[row][col-1] != 'X'
+				&& maze[row][col-1] != 'b'
+				&& maze[row][col-1] != '.') {
+				stack.push(Position(row,col));
+			col -= 1;
+			continue;
+		}
+
+		//mark the position with 'b', because we reach a dead end
+		maze[row][col] = 'b';
+
+		//pop the stack
+		Position topPos = stack.pop();
+
+		//reset the row and col
+		row = topPos.row;
+		col = topPos.col;
 	}
 }
 

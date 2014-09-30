@@ -111,4 +111,28 @@ void IsisCourse::update_enrollments() {
 	// the class capacity.
 
 	// TODO: Student writes code here
+
+	while (roster.size() < class_capacity) {
+		//move the major students first
+		if (!major_waitlist.is_empty()) {
+			//move the major student from major_waitlist
+			Student pending = major_waitlist.dequeue();
+
+			//add the major student to the roster
+			roster.add(pending);
+		}
+		else {
+			if (!other_waitlist.is_empty()) {
+				//move non-major student from other_waitlist
+				Student pending = other_waitlist.dequeue();
+
+				//add the non-major student to the roster
+				roster.add(pending);
+			}
+			else {
+				//both the waitlists are empty, break the loop
+				break;
+			}
+		}
+	}
 }

@@ -12,6 +12,8 @@ IsisCourse::IsisCourse() {
 
 IsisCourse::IsisCourse(int init_capacity) {
 	// TODO: Student writes code here
+
+	class_capacity = init_capacity;
 }
 
 IsisCourse::~IsisCourse() {
@@ -29,6 +31,38 @@ IsisCourse::ENROLLMENT_STATUS IsisCourse::enroll_student(Student s) {
 	// See the enrollment logic from the assignment handout or
 	// the IsisCourse.h file!
 	// TODO: Student writes code here
+
+	//check if the student is major or non-major
+	if (s.major) {
+		//major students
+
+		//if the class is not full, add to the roster
+		if (roster.size() < class_capacity) {
+			//if add the student successfully, return ENROLLED
+			//otherwise return NONE
+			if (roster.add(s))
+				return ENROLLED;
+			else
+				return NONE;
+		}
+		else {
+			//the roster is full
+			//add the student to the major waitlist
+			major_waitlist.enqueue(s);
+
+			//return status MAJOR_WAITLIST
+			return MAJOR_WAITLIST;
+		}
+	}
+	else {
+		//non-major students
+		//add them to the other waitlist
+		other_waitlist.enqueue(s);
+
+		//return status OTHER_WAITLIST
+		return OTHER_WAITLIST;
+	}
+
 }
 
 bool IsisCourse::drop_student(Student s) {
@@ -36,8 +70,7 @@ bool IsisCourse::drop_student(Student s) {
 	// TODO: Student writes code here
 
 
-	// if we dropped a student, there should be room on
-	// the roster
+	// if we dropped a student, there should be room on the roster
 	update_enrollments();
 	return found_student;
 }

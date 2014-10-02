@@ -69,9 +69,39 @@ bool IsisCourse::drop_student(Student s) {
 	bool found_student = false; // if we find the student to drop
 	// TODO: Student writes code here
 
+	//check roster first
+	if (roster.is_enrolled(s)) {
+		//remove the student from roster
+		found_student = true;
 
-	// if we dropped a student, there should be room on the roster
-	update_enrollments();
+		// if we dropped a student, there should be room on the roster
+		update_enrollments();
+	}
+	else {
+		int dropindex = -1;
+
+		//check major waitlist
+		dropindex = waitlist_position(MAJOR_WAITLIST, s);
+
+		//if find the student in major waitlist
+		if (dropindex != -1) {
+			drop_student_from_queue(MAJOR_WAITLIST, s);
+			found_student = true;
+		}
+		else {
+			//check other waitlist
+			dropindex = waitlist_position(OTHER_WAITLIST, s);
+
+			//if find the student in other waitlist
+			if (dropindex != -1) {
+				drop_student_from_queue(OTHER_WAITLIST, s);
+				found_student = true;
+			}
+		}
+
+	}
+
+
 	return found_student;
 }
 

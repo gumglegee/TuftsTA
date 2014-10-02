@@ -167,7 +167,8 @@ int IsisCourse::waitlist_position(ENROLLMENT_STATUS status, Student s) {
 		Student frontStu = q.dequeue();
 
 		if (frontStu.name.compare(s.name) == 0) {
-			//if the student is s, do NOT enqueue it
+			//if the student is s, enqueue it, and record its index
+			q.enqueue(frontStu);
 			stuIndex = index;
 		} else {
 			//if the student is not the dummy one, enqueue it
@@ -189,6 +190,8 @@ IsisCourse::ENROLLMENT_STATUS IsisCourse::status(Student s) {
 	// (or none) that the student is on.
 
 	// TODO: Student writes code here
+
+
 }
 
 void IsisCourse::print_list(ENROLLMENT_STATUS status) {

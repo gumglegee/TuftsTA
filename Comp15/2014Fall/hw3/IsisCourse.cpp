@@ -190,7 +190,16 @@ IsisCourse::ENROLLMENT_STATUS IsisCourse::status(Student s) {
 	// (or none) that the student is on.
 
 	// TODO: Student writes code here
+	if (roster.is_enrolled(s))
+		return ENROLLED;
 
+	if (waitlist_position(MAJOR_WAITLIST, s) != -1)
+		return MAJOR_WAITLIST;
+
+	if (waitlist_position(OTHER_WAITLIST, s) != -1)
+		return OTHER_WAITLIST;
+
+	return NONE;
 
 }
 

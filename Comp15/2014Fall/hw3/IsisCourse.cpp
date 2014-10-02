@@ -108,13 +108,13 @@ bool IsisCourse::drop_student(Student s) {
 bool IsisCourse::drop_student_from_queue(ENROLLMENT_STATUS status, Student s) {
 	bool isDropped = false;
 
-	Queue q;
+	Queue *q;
 
 	if (status == MAJOR_WAITLIST)
-		q = major_waitlist;
+		q = &major_waitlist;
 
 	if (status == OTHER_WAITLIST)
-		q = other_waitlist;
+		q = &other_waitlist;
 
 	//enqueue one dummy student into this queue
 	Student dummy = new Student();
@@ -149,13 +149,13 @@ int IsisCourse::waitlist_position(ENROLLMENT_STATUS status, Student s) {
 	int stuIndex = -1;
 	int index = 0;
 
-	Queue q;
+	Queue *q;
 
 	if (status == MAJOR_WAITLIST)
-		q = major_waitlist;
+		q = &major_waitlist;
 
 	if (status == OTHER_WAITLIST)
-		q = other_waitlist;
+		q = &other_waitlist;
 
 	//enqueue one dummy student into this queue
 	Student dummy = new Student();

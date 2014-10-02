@@ -75,6 +75,8 @@ public:
 	// false if the student was not on any list
 	bool drop_student(Student s);
 
+	bool drop_student_from_queue(ENROLLMENT_STATUS status, Student s);
+
 	// Updates the enrollment for the class up to the capacity.
 	// This is always executed when the capacity is increased,
 	// but can also be executed to fill up the class to its

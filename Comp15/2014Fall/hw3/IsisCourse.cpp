@@ -105,6 +105,44 @@ bool IsisCourse::drop_student(Student s) {
 	return found_student;
 }
 
+bool IsisCourse::drop_student_from_queue(ENROLLMENT_STATUS status, Student s) {
+	bool isDropped = false;
+
+	Queue q;
+
+	if (status == MAJOR_WAITLIST)
+		q = major_waitlist;
+
+	if (status == OTHER_WAITLIST)
+		q = other_waitlist;
+
+	//enqueue one dummy student into this queue
+	Student dummy = new Student();
+	q.enqueue(dummy);
+
+	//loop through the queue
+	do {
+		//get the front student
+		Student frontStu = q.dequeue();
+
+		if (frontStu.name.compare(s.name) == 0) {
+			//if the student is s, do NOT enqueue it
+			isDropped = true;
+		}
+		else {
+			//if the student is not the dummy one, enqueue it
+			if (frontStu.name.compare("") != 0)
+				q.enqueue(frontStu);
+			//if the student is the dummy one, exit the loop
+			else
+				break;
+		}
+	}
+	while (1);
+
+	return isDropped;
+}
+
 int IsisCourse::waitlist_position(ENROLLMENT_STATUS status, Student s) {
 	// TODO: Student writes code here
 

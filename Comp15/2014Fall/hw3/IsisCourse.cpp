@@ -6,6 +6,8 @@
 #include <iostream>
 #include "IsisCourse.h"
 
+using namespace std;
+
 IsisCourse::IsisCourse() {
 	class_capacity = 0; // no students allowed in yet
 }
@@ -117,13 +119,13 @@ bool IsisCourse::drop_student_from_queue(ENROLLMENT_STATUS status, Student s) {
 		q = &other_waitlist;
 
 	//enqueue one dummy student into this queue
-	Student dummy = new Student();
-	q.enqueue(dummy);
+	Student dummy;
+	q->enqueue(dummy);
 
 	//loop through the queue
 	do {
 		//get the front student
-		Student frontStu = q.dequeue();
+		Student frontStu = q->dequeue();
 
 		if (frontStu.name.compare(s.name) == 0) {
 			//if the student is s, do NOT enqueue it
@@ -132,7 +134,7 @@ bool IsisCourse::drop_student_from_queue(ENROLLMENT_STATUS status, Student s) {
 		else {
 			//if the student is not the dummy one, enqueue it
 			if (frontStu.name.compare("") != 0)
-				q.enqueue(frontStu);
+				q->enqueue(frontStu);
 			//if the student is the dummy one, exit the loop
 			else
 				break;
@@ -158,22 +160,22 @@ int IsisCourse::waitlist_position(ENROLLMENT_STATUS status, Student s) {
 		q = &other_waitlist;
 
 	//enqueue one dummy student into this queue
-	Student dummy = new Student();
-	q.enqueue(dummy);
+	Student dummy;
+	q->enqueue(dummy);
 
 	//loop through the queue
 	do {
 		//get the front student
-		Student frontStu = q.dequeue();
+		Student frontStu = q->dequeue();
 
 		if (frontStu.name.compare(s.name) == 0) {
 			//if the student is s, enqueue it, and record its index
-			q.enqueue(frontStu);
+			q->enqueue(frontStu);
 			stuIndex = index;
 		} else {
 			//if the student is not the dummy one, enqueue it
 			if (frontStu.name.compare("") != 0)
-				q.enqueue(frontStu);
+				q->enqueue(frontStu);
 			//if the student is the dummy one, exit the loop
 			else
 				break;
@@ -220,19 +222,19 @@ void IsisCourse::print_list(ENROLLMENT_STATUS status) {
 
 	// TODO: Student writes code here
 	//enqueue one dummy student into this queue
-	Student dummy = new Student();
-	waitlist.enqueue(dummy);
+	Student dummy;
+	waitlist_queue->enqueue(dummy);
 
 	int index = 1;
 
 	//loop through the queue
 	do {
 		//get the front student
-		Student frontStu = q.dequeue();
+		Student frontStu = waitlist_queue->dequeue();
 
 		//if the student is not the dummy one, enqueue and print it
 		if (frontStu.name.compare("") != 0) {
-			q.enqueue(frontStu);
+			waitlist_queue->enqueue(frontStu);
 			cout << index << ". " << frontStu.name << "\n";
 		}
 		//if the student is the dummy one, exit the loop

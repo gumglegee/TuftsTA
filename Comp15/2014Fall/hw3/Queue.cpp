@@ -8,7 +8,7 @@
 
 Queue::Queue() {
 	//initialize all the private member variables
-	capacity = Queue_INIT_CAPACITY;
+	capacity = QUEUE_INIT_CAPACITY;
 	front = back = 0;
 	size = 0;
 

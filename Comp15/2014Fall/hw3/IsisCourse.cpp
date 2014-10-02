@@ -219,6 +219,30 @@ void IsisCourse::print_list(ENROLLMENT_STATUS status) {
 	// now handle printing the queue
 
 	// TODO: Student writes code here
+	//enqueue one dummy student into this queue
+	Student dummy = new Student();
+	waitlist.enqueue(dummy);
+
+	int index = 1;
+
+	//loop through the queue
+	do {
+		//get the front student
+		Student frontStu = q.dequeue();
+
+		//if the student is not the dummy one, enqueue and print it
+		if (frontStu.name.compare("") != 0) {
+			q.enqueue(frontStu);
+			cout << index << ". " << frontStu.name << "\n";
+		}
+		//if the student is the dummy one, exit the loop
+		else
+			break;
+
+		index++;
+	} while (1);
+
+	return;
 }
 
 void IsisCourse::update_enrollments() {

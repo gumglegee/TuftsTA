@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+<title>Fecesbook</title>
+<script>
+	function update(x) {
+		//get input text and clear the input text area
+		var message = document.getElementById(x).value
+		document.getElementById(x).value = "";
+		
+		//get the date
+		date = new Date();
+		month = date.getMonth() + 1;
+		day = date.getDate() ;
+		year = date.getFullYear();
+		time = date.getHours() + ":" + date.getMinutes();
+		timeinfo = month + "/" + day + "/" + year + " " + time;
+		
+		//add li element in the DOM
+		var messageEle = document.createElement('li');
+		var testNode = document.createTextNode(timeinfo + " - " + message);
+		messageEle.appendChild(testNode);
+		list = document.getElementById('status')
+		
+		//Latest update message is displayed last, at the bottom
+		//list.appendChild(messageEle);
+		
+		//Latest update message is displayed first, at the top
+		list.insertBefore(messageEle, list.childNodes[0]);
+
+	}
+</script>
+</head>
+
+<body>
+	<h1>Fecebook</h1>
+	<div id="nav">
+		<ul>
+			<li id="home">Home</li>
+			<li id="groups">Groups</li>
+			<li id="profile">Profile</li>
+			<li id="contacts">Contacts</li>
+			<li id="inbox">Inbox</li>
+			<li id="applications">Applications</li>
+		</ul>
+	</div>
+	<h2 id="fullname">Barney Gumble</h2>
+	<p><img src="https://s3.amazonaws.com/tufts-cs-mchow-images/barneymug.gif" alt="profile" /></p>
+	<h3>What are you thinking about? <input type="text" id="msg" name="msg" size="30" onchange="update(this.id)" /></h3>
+	<h3>Updates</h3>
+	<div id="status">
+	</div>
+	<div id="yesterday">
+		<h3>Updates from yesterday:</h3>
+		<ul>
+			<li>Alice is now connected to Bob</li>
+			<li>Tom recommends Jerry</li>
+			<li>Harry just returned from a trip from Curaco</li>
+		</ul>
+	</div>
+	<div id="longlongtimeago">
+		<h3>Updates from long long time ago:</h3>
+		<ul>
+			<li>Harry just returned from a trip from Curaco</li>
+			<li>Joan is now connected to Mary</li>
+			<li>Steven is now connected to James</li>
+		</ul>
+	</div>
+</body>
+</html>

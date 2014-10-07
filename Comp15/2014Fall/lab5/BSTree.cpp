@@ -143,9 +143,31 @@ void BST::preOrder(BSTNode* root)
 {
 	//preorder with a stack
 	//TODO: stack defined here:
+	stack<BSTNode*> s1;
 
 	//TODO: your code here
+	if (root == NULL)
+		return;
 
+	//push the root into the stack
+	s1.push(root);
+
+	while (! s1.empty()) {
+		//pop the top node
+		BSTNode* top = s1.top();
+		s1.pop();
+
+		//print the top node
+		cout << top->value << " ";
+
+		//if the node has right child, push it into the stack
+		if (top->right != NULL)
+			s1.push(top->right);
+
+		//if the node has left child, push it into the stack
+		if (top->left != NULL)
+			s1.push(top->left);
+	}
 
 }
 

@@ -74,6 +74,9 @@ void BST::inOrder(BSTNode* root)
 {
 	//TODO: your code here
 
+	if (root == NULL)
+		return;
+
 	//recursion
 	//if the root node has left child, inOrder the left child
 	if (root->left != NULL)
@@ -101,6 +104,9 @@ void BST::postOrder()
 void BST::postOrder(BSTNode* root)
 {
 	//TODO: your code here --- if you want
+
+	if (root == NULL)
+		return;
 
 	//recursion
 

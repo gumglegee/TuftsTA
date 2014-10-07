@@ -187,8 +187,30 @@ void BST::levelOrder(BSTNode* root)
 {
 
 	//TODO: Use a queue, declare it here
+	queue<BSTNode*> q1;
 
 	//TODO: your code here
 
+	//corner case: root is null
+	if (root == NULL)
+		return;
+
+	//enqueue the root node
+	q1.push(root);
+
+	while (! q1.empty()) {
+		//print the front node of the queue
+		BSTNode* front = q1.front();
+		q1.pop();
+		cout << front->value << " ";
+
+		//if the front node has left child, enqueue the left child
+		if (front->left != NULL)
+			q1.push(front->left);
+
+		//if the front node has right child, enqueue the right child
+		if (front->right != NULL)
+			q1.push(front->right);
+	} //end while
 
 }

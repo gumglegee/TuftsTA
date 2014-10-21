@@ -113,7 +113,7 @@ bool BinarySearchTree::contains(int value) {
 	return contains(root, value);
 }
 
-bool contains(Node *node, int value) {
+bool BinarySearchTree::contains(Node *node, int value) {
 	// TODO: Students write code here
 
 	//returns false, if the node is empty
@@ -126,9 +126,9 @@ bool contains(Node *node, int value) {
 
 	//recursively search the left or right branch
 	if (node->data < value)
-		return contains(node->right);
+		return contains(node->right, value);
 	else
-		return contains(node->left);
+		return contains(node->left, value);
 }
 
 void BinarySearchTree::insert(int value) {

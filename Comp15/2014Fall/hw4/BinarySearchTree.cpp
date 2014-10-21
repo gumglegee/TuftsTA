@@ -82,14 +82,30 @@ int BinarySearchTree::find_min() {
 
 Node *BinarySearchTree::find_min(Node *node) {
 	// TODO: Students write code here
+
+	//if the node does not have the left child, it will be the minimal
+	if (node->left == NULL)
+		return node;
+	//if the node has the left child, recursively find the minimal
+	else
+		return find_min(node->left);
 }
 
 int BinarySearchTree::find_max() {
 	// TODO: Students write code here
+	if (root == NULL) return INT_MAX;
+	return find_max(root)->data;
 }
 
 Node *BinarySearchTree::find_max(Node *node) {
 	// TODO: Students write code here
+
+	//if the node does not have the right child, it will be the maximal
+	if (node->right == NULL)
+		return node;
+	//if the node has the right child, recursively find the maximal
+	else
+		return find_max(node->right);
 }
 
 bool BinarySearchTree::contains(int value) {

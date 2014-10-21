@@ -7,6 +7,7 @@
 
 BinarySearchTree::BinarySearchTree() {
 	// TODO: Students write code here
+	root = NULL;
 }
 
 BinarySearchTree::~BinarySearchTree() {
@@ -17,6 +18,22 @@ BinarySearchTree::~BinarySearchTree() {
 void BinarySearchTree::post_order_delete(Node *node) {
 	// TODO: students write code here
 	// (hint: use a post-order traversal to remove all nodes)
+
+	if (node == NULL)
+		return;
+
+	//recursively delete left node
+	if (node->left != NULL)
+		post_order_delete(node->left);
+
+	//recursively delete right node
+	if (node->right != NULL)
+		post_order_delete(node->right);
+
+	//delete the node itself
+	delete node;
+
+	node = NULL;
 }
 
 // copy constructor
@@ -45,6 +62,17 @@ Node * BinarySearchTree::pre_order_copy(Node *node) {
 	if (node == NULL) return NULL;
 	Node *new_node = new Node();
 
+	//copy all the member value
+	new_node->count = node->count;
+	new_node->data = node->data;
+
+	if (node->left != NULL)
+		node->left = pre_order_copy(node->left);
+
+	if (node->right != NULL)
+		node->right = pre_order_copy(node->right);
+
+	return new_node;
 }
 
 int BinarySearchTree::find_min() {

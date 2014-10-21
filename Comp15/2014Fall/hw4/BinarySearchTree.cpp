@@ -189,6 +189,18 @@ int BinarySearchTree::tree_height() {
 
 int BinarySearchTree::tree_height(Node *node) {
 	// TODO: Students write code here
+
+	//return 0, if the node is empty
+	if (node == NULL)
+		return 0;
+
+	//get the height of both branch
+	int lheight = tree_height(node->left);
+	int rheight = tree_height(node->right);
+
+	int max = lheight>=rheight?lheight:rheight;
+
+	return max+1;
 }
 
 // returns the total number of nodes

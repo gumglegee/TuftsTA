@@ -71,10 +71,10 @@ Node * BinarySearchTree::pre_order_copy(Node *node) {
 	new_node->data = node->data;
 
 	if (node->left != NULL)
-		node->left = pre_order_copy(node->left);
+		new_node->left = pre_order_copy(node->left);
 
 	if (node->right != NULL)
-		node->right = pre_order_copy(node->right);
+		new_node->right = pre_order_copy(node->right);
 
 	return new_node;
 }

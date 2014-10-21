@@ -190,11 +190,11 @@ int BinarySearchTree::tree_height() {
 int BinarySearchTree::tree_height(Node *node) {
 	// TODO: Students write code here
 
-	//return 0, if the node is empty
+	//returns 0, if the node is empty
 	if (node == NULL)
 		return 0;
 
-	//get the height of both branch
+	//get the height of both branches
 	int lheight = tree_height(node->left);
 	int rheight = tree_height(node->right);
 
@@ -210,6 +210,16 @@ int BinarySearchTree::node_count() {
 
 int BinarySearchTree::node_count(Node *node) {
 	// TODO: Students write code here
+
+	//returns 0 if the node is empty
+	if (node == NULL)
+		return 0;
+
+	//get the counts of both branches
+	int lcount = node_count(node->left);
+	int rcount = node_count(node->right);
+
+	return lcount+rcount+node->count;
 }
 
 // return the sum of all the node values (including duplicates)
@@ -219,6 +229,15 @@ int BinarySearchTree::count_total() {
 
 int BinarySearchTree::count_total(Node *node) {
 	// TODO: Students write code here:
+	//returns 0 if the node is empty
+	if (node == NULL)
+		return 0;
+
+	//get the total of both branches
+	int ltotal = count_total(node->left);
+	int rtotal = count_total(node->right);
+
+	return ltotal + rtotal + node->count*node->data;
 }
 
 // use the printPretty helper to make the tree look nice

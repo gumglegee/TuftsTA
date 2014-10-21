@@ -137,6 +137,41 @@ void BinarySearchTree::insert(int value) {
 
 void BinarySearchTree::insert(Node *node,Node *parent, int value) {
 	// TODO: Students write code here
+
+	//if the node is empty, create a new node
+	if (node == NULL) {
+		node = new Node();
+		//initialize the details
+		node->data = value;
+		node->count = 1;
+		node->left = NULL;
+		node->right = NULL;
+
+		//if the node is the root
+		if (parent == NULL)
+			root = node;
+		else {
+			if (parent->data > value)
+				//left child
+				parent->left = node;
+			else
+				//right child
+				parent->right = node;
+		}
+	}
+	else {
+		// the node is not empty
+		if (node->data == value)
+			node->count++;
+		else {
+			if (node->data > value)
+				//recursively insert the value into the left
+				insert(node->left, node, value);
+			else
+				//recursively insert the value into the right
+				insert(node->right, node, value);
+		}
+	}
 }
 
 bool BinarySearchTree::remove(int value) {

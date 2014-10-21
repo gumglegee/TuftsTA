@@ -47,12 +47,16 @@ BinarySearchTree& BinarySearchTree::operator=
 		(const BinarySearchTree &source) {
 	// TODO: Students write code here
 	// check for self-assignment
+	if (this != &source) {
+		// delete current tree if it exists
+		post_order_delete(root);
 
-	// delete current tree if it exists
-
-	// use pre-order traversal to copy the tree
+		// use pre-order traversal to copy the tree
+		pre_order_copy(source.root);
+	}
 
 	// don't forget to "return *this"
+	return *this;
 }
 
 Node * BinarySearchTree::pre_order_copy(Node *node) {

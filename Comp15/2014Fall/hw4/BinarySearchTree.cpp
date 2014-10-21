@@ -110,10 +110,25 @@ Node *BinarySearchTree::find_max(Node *node) {
 
 bool BinarySearchTree::contains(int value) {
 	// TODO: Students write code here
+	return contains(root, value);
 }
 
 bool contains(Node *node, int value) {
 	// TODO: Students write code here
+
+	//returns false, if the node is empty
+	if (node == NULL)
+		return false;
+
+	//if the data is equal to the value, returns true
+	if (node->data == value)
+		return true;
+
+	//recursively search the left or right branch
+	if (node->data < value)
+		return contains(node->right);
+	else
+		return contains(node->left);
 }
 
 void BinarySearchTree::insert(int value) {

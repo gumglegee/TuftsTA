@@ -34,7 +34,7 @@ int main() {
 
 	// make a copy with copy constructor
 	BinarySearchTree bst_copy_constructor = bst;
-	//bst_copy_constructor.print_tree();
+	bst_copy_constructor.print_tree();
 
 	// make a copy with assignment overload
 	BinarySearchTree bst_copy_1;

@@ -275,6 +275,7 @@ bool BinarySearchTree::remove(Node *node, Node *parent, int value) {
 				//update the node details using rmin's detail
 				node->data = rmin->data;
 				node->count = rmin->count;
+				rmin->count = 1;
 
 				//remove the rmin from the bst
 				return remove(rmin, rminparent, node->data);

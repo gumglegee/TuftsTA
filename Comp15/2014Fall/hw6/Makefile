@@ -1,18 +1,17 @@
 #
-# Makefile for SongSearch, Assignment 6
+# Makefile for List_linked_list
 #
 CXX = clang++
-FLAGS = -Wall -g3
-
-songsearch: <your .cpp and .h files go here>
-	${CXX} ${FLAGS} -o songsearch <your .cpp files go here>
-	
+FLAGS =  -g -Wall 
+   
+cards_linked_list: Node.cpp Node.h Trie.cpp Trie.h Song.cpp Song.h \
+	SearchEngine.cpp SearchEngine.h main.cpp
+	${CXX} ${FLAGS} -o songsearch Node.cpp main.cpp \
+	        Trie.cpp Song.cpp SearchEngine.cpp
 clean:
-	rm -f songsearch
+	rm -f hw6
 
-provide_design:
-	provide comp15 hw5_design songsearch_design.txt
-
-provide:
-	provide comp15 hw5 <all your files go here>
-
+make provide:
+	provide comp15 hw6 main.cpp Node.cpp Node.h Trie.cpp Trie.h \
+		Song.cpp Song.h SearchEngine.cpp SearchEngine.h \
+		Makefile
